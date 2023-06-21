@@ -243,6 +243,7 @@ class Showcase extends StatefulWidget {
   /// Note-: Even if barrier interactions are disabled, this handler
   /// will still provide a callback.
   final VoidCallback? onBarrierClick;
+  final VoidCallback? onSkipClick;
 
   const Showcase({
     required this.key,
@@ -288,6 +289,7 @@ class Showcase extends StatefulWidget {
     this.titleTextDirection,
     this.descriptionTextDirection,
     this.onBarrierClick,
+    this.onSkipClick,
   })  : height = null,
         width = null,
         container = null,
@@ -325,6 +327,7 @@ class Showcase extends StatefulWidget {
     this.disableDefaultTargetGestures = false,
     this.tooltipPosition,
     this.onBarrierClick,
+    this.onSkipClick,
   })  : showArrow = false,
         onToolTipClick = null,
         scaleAnimationDuration = const Duration(milliseconds: 300),
@@ -516,6 +519,23 @@ class _ShowcaseState extends State<Showcase> {
                         color: widget.overlayColor
                             .withOpacity(widget.overlayOpacity),
                       ),
+                      child: Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white),
+                            onPressed: () {
+                              widget.onSkipClick?.call();
+                            },
+                            child: const Text(
+                              "skip",
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                   )
                 : Container(
@@ -524,6 +544,23 @@ class _ShowcaseState extends State<Showcase> {
                     decoration: BoxDecoration(
                       color: widget.overlayColor
                           .withOpacity(widget.overlayOpacity),
+                    ),
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white),
+                          onPressed: () {
+                            widget.onSkipClick?.call();
+                          },
+                          child: const Text(
+                            "skip",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
           ),
